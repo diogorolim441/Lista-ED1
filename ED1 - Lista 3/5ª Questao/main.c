@@ -15,7 +15,7 @@ void libera_lista(lista_din* din){
 
 void lista_vazia(lista_din * din){
     if(din->tamanho == 0){
-        printf("Fila Vazia");
+        printf("Lista Vazia");
     }
 }
 
