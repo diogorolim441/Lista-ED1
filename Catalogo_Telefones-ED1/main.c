@@ -91,7 +91,7 @@ int impressao_ArvAVL(Hash *ha, int ddd, ArvAVL *arv3){
         }while(resposta != 4);
         
     }else{
-        printf("Nao existem números cadastrados nesse DDD.\n");
+        printf("Nao existem numeros cadastrados nesse DDD.\n");
     }
 }
 
