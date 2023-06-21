@@ -103,31 +103,32 @@ int valorString(char *str) {
     return valor;
 }
 
-// insere uma arvore na tabela hash encadeada
+// insere uma arvore na tabela hash dentro da lsita encadeada
 int insereHash(Hash *ha, int ddd, struct dados pessoa) {
-    if(ha == NULL || ha->qtd == ha->TABLE_SIZE)
+    if (ha == NULL || ha->qtd == ha->TABLE_SIZE)
         return 0;
     int chave = ddd;
-    int pos;
-    pos = chaveDivisao(chave, ha->TABLE_SIZE);
+    int pos = chaveDivisao(chave, ha->TABLE_SIZE);  
     struct discagem* novo = (struct discagem*)malloc(sizeof(struct discagem));
     novo->prefixo = ddd;
     novo->prox = NULL;
-    if(ha->itens[pos] == NULL){
-        ha->itens[pos] = novo;  //coloca a árvore na tabela hash caso não exista nenhuma
-    }
-    struct discagem* aux = ha->itens[pos];
-    while(aux != NULL){
-        if(aux->prefixo == ddd){
-            int resultInsereArv = insere_ArvAVL(aux->arv, pessoa);  //confere se o número já existe na árvore (retorna 0 se sim e 1 se não)
-            if(resultInsereArv == 0){
-                return 0;
+    if (ha->itens[pos] == NULL) {
+        ha->itens[pos] = novo;  // coloca a árvore na tabela hash caso não exista nenhuma
+    } else {
+        struct discagem* aux = ha->itens[pos];
+        while (aux->prox != NULL) {
+            if (aux->prefixo == ddd) {
+                int resultInsereArv = insere_ArvAVL(aux->arv, pessoa);
+                if (resultInsereArv == 0) {
+                    free(novo); // libera a memória alocada para 'novo'
+                    return 0;
+                }
+                return 1;
             }
-            return 1;
+            aux = aux->prox;
         }
-    aux = aux->prox;
+        aux->prox = novo; // atualiza o ponteiro 'prox' do último nó válido para 'novo'
     }
-    aux = novo;
     ArvAVL *arv = cria_ArvAVL();
     insere_ArvAVL(arv, pessoa);
     novo->arv = arv;
@@ -135,16 +136,18 @@ int insereHash(Hash *ha, int ddd, struct dados pessoa) {
     return 1;
 }
 
-// busca uma arvore na tabela hash com base no prefixo ddd
+
 int buscaHash(Hash *ha, int prefixo, ArvAVL *arv) {
     if(ha == NULL)
         return 0;
     int pos = chaveDivisao(prefixo, ha->TABLE_SIZE);
-    if(ha->itens[pos] == NULL)
+    if(ha->itens[pos] == NULL){
         return 0;
+    }
     struct discagem* aux = ha->itens[pos];
     while(aux != NULL){
         if(aux->prefixo == prefixo){
+            *arv = (*aux->arv);
             return 1;
         }
         aux = aux->prox;
@@ -152,20 +155,19 @@ int buscaHash(Hash *ha, int prefixo, ArvAVL *arv) {
     return 0;
 }
 
-/* varre toda a tabela hash e imprime os dados das arvores ordenado por numero*/
+/* varre toda a tabela hash e imprime os dados das arvores das discagems encadeadas que estao 
+na tabela hash ordenado por numero*/
 void imprimirTabelaOrdenadaNumero(int TABLE_SIZE, Hash *ha) {
     int i, existePessoa = 0;
     printf("\n------------------------TABELA--------------------------\n");
     for(i = 0; i < TABLE_SIZE; i++) {
-        if(ha->itens[i] != NULL){
-            struct discagem* aux = ha->itens[i];
-            while(aux != NULL){
-                printf("DDD: %d\n", aux->prefixo);
-                emOrdem_ArvAVL(aux->arv);
-                aux = aux->prox;
-                existePessoa++;
-            }  
-        }
+        struct discagem* aux = ha->itens[i];
+        while(aux != NULL){
+            printf("DDD: %d\n", aux->prefixo);
+            emOrdem_ArvAVL(aux->arv);
+            aux = aux->prox;
+            existePessoa++;
+        } 
     }
     if(existePessoa == 0) {
         printf("Nao existe pessoas cadastradas no catalogo.\n");
@@ -175,14 +177,13 @@ void imprimirTabelaOrdenadaNumero(int TABLE_SIZE, Hash *ha) {
 
 
 /*void imprimirTabelaOrdenadaNome(int TABLE_SIZE, Hash *ha) {
-    //ListaDin *liDin = cria_lista_din();
+    //discagemDin *liDin = cria_discagem_din();
     int i;
     printf("\n------------------------TABELA--------------------------\n");
     for(i = 0; i < TABLE_SIZE; i++) {
         if(tamanho_lista(ha->itens[i]) > 0) {
-            Elem *aux;
-            aux = *ha->itens[i];
-            printf("DDD: %d\n", aux->ddd.prefixo);
+            struct discagem* aux = ha->itens[i];
+            printf("DDD: %d\n", aux->prefixo);
             
         }
     }

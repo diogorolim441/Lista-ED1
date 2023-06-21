@@ -1,5 +1,8 @@
+#ifndef TABELAHASH_H
+#define TABELAHASH_H
 #include "ArvoreAVL.h"
 #include "ArvoreAVL.c"
+
 
 struct discagem{
     int prefixo;
@@ -18,3 +21,4 @@ int insereHash(Hash *ha, int ddd, struct dados pessoa);
 int buscaHash(Hash *ha, int prefixo, ArvAVL *arv);
 void imprimirTabelaOrdenadaNumero(int TABLE_SIZE, Hash *ha);
 void imprimirTabelaOrdenadaNome(int TABLE_SIZE, Hash *ha);
+#endif

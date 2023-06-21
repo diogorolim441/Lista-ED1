@@ -3,7 +3,7 @@
 #include <string.h>
 #include "ArvoreAVL.h"
 
-struct NO{                //A "bolinha" em si, com os ponteiros para a direita e esquerda, o seus dados e a representação da altura
+struct NO {
     struct dados pessoa;
     int alt; //altura daquela sub-arvore
     struct NO *esq;
@@ -112,7 +112,7 @@ void posOrdem_ArvAVL(ArvAVL *raiz) {
     }
 }
 
-//Procura a pessoa na arvore avl
+// funcao que imprime a arvore avl no formato pre ordem
 int consulta_ArvAVL(ArvAVL *raiz, int numero) {
     if(raiz == NULL)
         return 0;
@@ -297,3 +297,20 @@ int remove_ArvAVL(ArvAVL *raiz, int numero) {
     }
     return res;
 }
+
+// metodo que percorre a arvore avl inteira e adiciona em uma lista ordenada
+/*
+void percorre_ArvAVL(ArvAVL *raiz, ListaDin *li) {
+    if(raiz == NULL)
+        return;
+    if(*raiz != NULL) {
+        percorre_ArvAVL(&((*raiz)->esq));
+        struct dados pessoa;
+        pessoa.nome = (*raiz)->pessoa.nome;
+        pessoa.numero = (*raiz)->pessoa.numero;
+        pessoa.endereco = (*raiz)->pessoa.endereco;
+        insere_lista_ordenada(li, pessoa);
+        percorre_ArvAVL(&((*raiz)->dir));
+    }
+}
+*/
