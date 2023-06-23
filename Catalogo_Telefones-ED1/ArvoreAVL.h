@@ -2,7 +2,7 @@
 #define ARVORE_AVL_H
 
 struct dados {
-    int numero;
+    float numero;
     char nome[100];
     char endereco[100];
 };
@@ -20,6 +20,5 @@ void preOrdem_ArvAVL(ArvAVL *raiz);
 void emOrdem_ArvAVL(ArvAVL *raiz);
 void posOrdem_ArvAVL(ArvAVL *raiz);
 int consulta_ArvAVL(ArvAVL *raiz, int numero);
-//void percorre_ArvAVL(ArvAVL *raiz, ListaDin *li)
 
 #endif

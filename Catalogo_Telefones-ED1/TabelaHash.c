@@ -127,7 +127,7 @@ int insereHash(Hash *ha, int ddd, struct dados pessoa) {
             }
             aux = aux->prox;
         }
-        aux = novo; // atualiza o ponteiro 'prox' do último nó válido para 'novo'
+        aux = novo; // atualiza o ponteiro aux para 'novo'
     }
     ArvAVL *arv = cria_ArvAVL();
     insere_ArvAVL(arv, pessoa);

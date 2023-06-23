@@ -76,7 +76,7 @@ void preOrdem_ArvAVL(ArvAVL *raiz) {
         return;
     if(*raiz != NULL) {
         printf("Nome: %s \n", (*raiz)->pessoa.nome);
-        printf("Numero: %d \n", (*raiz)->pessoa.numero);
+        printf("Numero: %.0f \n", (*raiz)->pessoa.numero);
         printf("Endereco: %s \n", (*raiz)->pessoa.endereco);
         printf("\n");
         preOrdem_ArvAVL(&((*raiz)->esq));
@@ -91,7 +91,7 @@ void emOrdem_ArvAVL(ArvAVL *raiz) {
     if(*raiz != NULL) {
         emOrdem_ArvAVL(&((*raiz)->esq));
         printf("Nome: %s \n", (*raiz)->pessoa.nome);
-        printf("Numero: %d \n", (*raiz)->pessoa.numero);
+        printf("Numero: %.0f \n", (*raiz)->pessoa.numero);
         printf("Endereco: %s \n", (*raiz)->pessoa.endereco);
         printf("\n");
         emOrdem_ArvAVL(&((*raiz)->dir));
@@ -106,7 +106,7 @@ void posOrdem_ArvAVL(ArvAVL *raiz) {
         posOrdem_ArvAVL(&((*raiz)->esq));
         posOrdem_ArvAVL(&((*raiz)->dir));
         printf("Nome: %s \n", (*raiz)->pessoa.nome);
-        printf("Numero: %d \n", (*raiz)->pessoa.numero);
+        printf("Numero: %.0f \n", (*raiz)->pessoa.numero);
         printf("Endereco: %s \n", (*raiz)->pessoa.endereco);
         printf("\n");
     }
@@ -123,7 +123,7 @@ int consulta_ArvAVL(ArvAVL *raiz, int numero) {
             printf("Pessoa encontrada:\n");
             printf("Nome: %s\n", atual->pessoa.nome);
             printf("Endereco: %s\n", atual->pessoa.endereco);
-            printf("Numero: %d\n", atual->pessoa.numero);
+            printf("Numero: %.0f\n", atual->pessoa.numero);
             return 1;
         }
         if(numero > atual->pessoa.numero)
@@ -297,20 +297,3 @@ int remove_ArvAVL(ArvAVL *raiz, int numero) {
     }
     return res;
 }
-
-// metodo que percorre a arvore avl inteira e adiciona em uma lista ordenada
-/*
-void percorre_ArvAVL(ArvAVL *raiz, ListaDin *li) {
-    if(raiz == NULL)
-        return;
-    if(*raiz != NULL) {
-        percorre_ArvAVL(&((*raiz)->esq));
-        struct dados pessoa;
-        pessoa.nome = (*raiz)->pessoa.nome;
-        pessoa.numero = (*raiz)->pessoa.numero;
-        pessoa.endereco = (*raiz)->pessoa.endereco;
-        insere_lista_ordenada(li, pessoa);
-        percorre_ArvAVL(&((*raiz)->dir));
-    }
-}
-*/
