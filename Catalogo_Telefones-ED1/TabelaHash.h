@@ -12,8 +12,6 @@ struct discagem{
 
 typedef struct hash Hash;
 
-typedef struct NO *ArvAVL;
-
 Hash* criaHash(int TABLE_SIZE);
 void liberaHash(Hash* ha);
 int valorString(char *str);
