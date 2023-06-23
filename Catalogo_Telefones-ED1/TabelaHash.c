@@ -105,18 +105,18 @@ int valorString(char *str) {
 
 // insere uma arvore na tabela hash dentro da lsita encadeada
 int insereHash(Hash *ha, int ddd, struct dados pessoa) {
-    if (ha == NULL || ha->qtd == ha->TABLE_SIZE)
+    if (ha == NULL || ha->qtd == ha->TABLE_SIZE)  
         return 0;
     int chave = ddd;
-    int pos = chaveDivisao(chave, ha->TABLE_SIZE);  
+    int pos = chaveDivisao(chave, ha->TABLE_SIZE);
     struct discagem* novo = (struct discagem*)malloc(sizeof(struct discagem));
     novo->prefixo = ddd;
     novo->prox = NULL;
-    if (ha->itens[pos] == NULL) {
+    if(ha->itens[pos] == NULL) {
         ha->itens[pos] = novo;  // coloca a árvore na tabela hash caso não exista nenhuma
     } else {
         struct discagem* aux = ha->itens[pos];
-        while (aux->prox != NULL) {
+        while (aux != NULL) {
             if (aux->prefixo == ddd) {
                 int resultInsereArv = insere_ArvAVL(aux->arv, pessoa);
                 if (resultInsereArv == 0) {
@@ -127,7 +127,7 @@ int insereHash(Hash *ha, int ddd, struct dados pessoa) {
             }
             aux = aux->prox;
         }
-        aux->prox = novo; // atualiza o ponteiro 'prox' do último nó válido para 'novo'
+        aux = novo; // atualiza o ponteiro 'prox' do último nó válido para 'novo'
     }
     ArvAVL *arv = cria_ArvAVL();
     insere_ArvAVL(arv, pessoa);

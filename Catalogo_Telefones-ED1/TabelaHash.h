@@ -3,7 +3,6 @@
 #include "ArvoreAVL.h"
 #include "ArvoreAVL.c"
 
-
 struct discagem{
     int prefixo;
     ArvAVL *arv;
