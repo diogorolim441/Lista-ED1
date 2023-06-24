@@ -8,12 +8,17 @@ int validarDDD(int ddd);
 
 // funcao responsavel por inserir os dados na tabela hash.
 int inserir_ArvAVL_DDD(int ddd, Hash *ha, int numero) {
+    clock_t start, end;
+    double cpu_time_used;
+
     char nome[100];
     printf("Digite o nome: ");
     scanf(" %[^\n]s", nome);
     char endereco[100];
     printf("Digite o endereco: ");
+   
     scanf(" %[^\n]s", endereco);
+    
 
     struct dados pessoa;
     pessoa.numero = numero;
@@ -21,20 +26,34 @@ int inserir_ArvAVL_DDD(int ddd, Hash *ha, int numero) {
     strcpy(pessoa.endereco, endereco);
     
     if(validarDDD(ddd) == 1){
+        start = clock(); // marca o início da contagem do tempo
         int inserePessoaTabelaHash = insereHash(ha, ddd, pessoa);
-        if(inserePessoaTabelaHash == 1)
-            return 1;
+        end = clock(); // marca o fim da contagem do tempo
+        cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC; // calcula o tempo usado em segundos
+        printf("\nTempo de execução: %.10lf segundos\n", cpu_time_used);
+        if(inserePessoaTabelaHash == 1){
+            
+                    return 1;
+        }
+            
         else{
             return 0;
         }
     }
+
 }
 
 // funcao responsavel por buscar os dados de uma pessoa na tabela hash.
 int busca_ArvAVL(Hash *ha, int ddd, int numero, ArvAVL *arv2) {
     int consultaHashListaArv = buscaHash(ha, ddd, arv2);
     if(consultaHashListaArv == 1) {
+        clock_t start, end;
+        double cpu_time_used;
+        start = clock(); // marca o início da contagem do tempo
         int resultConsulta = consulta_ArvAVL(arv2, numero);
+        end = clock(); // marca o fim da contagem do tempo
+        cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC; // calcula o tempo usado em segundos
+        printf("\nTempo de execução: %.10lf segundos\n", cpu_time_used);
         if(resultConsulta == 1)
             return 1;
     }
@@ -43,14 +62,22 @@ int busca_ArvAVL(Hash *ha, int ddd, int numero, ArvAVL *arv2) {
 
 // funcao responsavel por excluir uma pessoa da tabela hash
 int excluiPessoa_ArvAVL(Hash *ha, int ddd, int numero, ArvAVL *arvExclusao) {
+    clock_t start, end;
+    double cpu_time_used;
+    start = clock(); // marca o início da contagem do tempo
+   
+   
     int consultaHashListaArv = buscaHash(ha, ddd, arvExclusao);
     if(consultaHashListaArv == 1) {
         int resultAlturaAntes = altura_ArvAVL(arvExclusao);
         int resultExclusao = remove_ArvAVL(arvExclusao, numero);
         if(resultExclusao == 1) {
+            end = clock(); // marca o fim da contagem do tempo
             printf("A altura da arvore antes da exclusao era: %d\n", resultAlturaAntes);
             int resultAlturaDepois = altura_ArvAVL(arvExclusao);
             printf("A altura da arvore depois da exclusao e: %d\n", resultAlturaDepois);
+            cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC; // calcula o tempo usado em segundos
+            printf("\nTempo de execução: %.10lf segundos\n", cpu_time_used);
             return 1;
         }
     }
@@ -155,12 +182,28 @@ void gerarListaTabelaHash(Hash *ha) {
         switch(opcao) {
             case 1:
             {
+                clock_t start, end;
+                double cpu_time_used;
+                start = clock(); // marca o início da contagem do tempo
+
                 imprimirTabelaOrdenadaNumero(1427, ha);
+
+                end = clock(); // marca o fim da contagem do tempo
+                cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC; // calcula o tempo usado em segundos
+                printf("\nTempo de execução: %.10lf segundos\n", cpu_time_used);
                 break;
             }
             case 2:
             {
+                clock_t start, end;
+                double cpu_time_used;
+                start = clock(); // marca o início da contagem do tempo
+
                 imprimirTabelaOrdenadaNome(1427, ha);
+
+                end = clock(); // marca o fim da contagem do tempo
+                cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC; // calcula o tempo usado em segundos
+                printf("\nTempo de execução: %.10lf segundos\n", cpu_time_used);
                 break;
             }
             case 3:
@@ -222,6 +265,7 @@ int inserirNumeroAleatorio(Hash *ha, int ddd) {
 }
 
 int main(){
+    
     Hash *ha = criaHash(1427);
     int escolha;
     printf("Bem vindo ao Catalogo Nacional de Telefones e Enderecos\n");
@@ -266,10 +310,16 @@ int main(){
                             printf("Opcao invalida, tente novamente!\n");
                             break;
                     }
+                    
+                    
                 }while(escolhaNumero != 1 && escolhaNumero != 2);
+                
                 int resultInserir = inserir_ArvAVL_DDD(ddd, ha, numero);
+                
                 if(resultInserir == 1) {
+                    
                     printf("Pessoa inserida com sucesso!\n");
+                                   
                 }else{
                     printf("Erro ao inserir pessoa!\n");
                 }
