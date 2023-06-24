@@ -112,6 +112,15 @@ void posOrdem_ArvAVL(ArvAVL *raiz) {
     }
 }
 
+// funcao que imprime a arvore avl no formato em ordem por nome
+void imprimirEmOrdemNome(ArvAVL arv) {
+    if (arv != NULL) {
+        imprimirEmOrdemNome(arv->esq);
+        printf("Nome: %s\nEndereco: %s\nNumero: %.0f\n\n", arv->pessoa.nome, arv->pessoa.endereco,arv->pessoa.numero);
+        imprimirEmOrdemNome(arv->dir);
+    }
+}
+
 // funcao que imprime a arvore avl no formato pre ordem
 int consulta_ArvAVL(ArvAVL *raiz, int numero) {
     if(raiz == NULL)
@@ -234,6 +243,63 @@ int insere_ArvAVL(ArvAVL *raiz, struct dados pessoa) {
     }
     atual->alt = maior(altura_NO(atual->esq), altura_NO(atual->dir)) + 1;
     return res;
+}
+
+int insere_ArvAVL_Nome(ArvAVL *raiz, struct dados pessoa) {
+    int res;
+    if(*raiz == NULL) { //arvore vazia ou no folha
+        struct NO *novo;
+        novo = (struct NO*) malloc(sizeof(struct NO));
+        if(novo == NULL)
+            return 0;
+        novo->pessoa = pessoa;
+        novo->alt = 0;
+        novo->esq = NULL;
+        novo->dir = NULL;
+        *raiz = novo;
+        return 1;
+    }
+    struct NO *atual = *raiz;
+    int comparacao = strcmp(pessoa.nome, atual->pessoa.nome);
+    if(comparacao < 0) {
+        if((res = insere_ArvAVL_Nome(&(atual->esq), pessoa)) == 1) {
+            if(fatorBalanceamento_NO(atual) >= 2) {
+                if(pessoa.numero < (*raiz)->esq->pessoa.numero) {
+                    RotacaoLL(raiz);
+                }else{
+                    RotacaoLR(raiz);
+                }
+            }
+        }
+    }else{
+        if(comparacao > 0) {
+            if((res = insere_ArvAVL_Nome(&(atual->dir), pessoa)) == 1) {
+                if(fatorBalanceamento_NO(atual) >= 2) {
+                    if((*raiz)->dir->pessoa.numero < pessoa.numero) {
+                        RotacaoRR(raiz);
+                    }else{
+                        RotacaoRL(raiz);
+                    }
+                }
+            }
+        }else{
+            return 0;
+        }
+    }
+    atual->alt = maior(altura_NO(atual->esq), altura_NO(atual->dir)) + 1;
+    return res;
+}
+
+//reorganiza a árvore AVL para nome
+void reorganizarArvAVL(ArvAVL *raiz, ArvAVL **novaRaiz){
+    if (*raiz == NULL)
+        return;
+
+    if (raiz != NULL) {
+        reorganizarArvAVL(&((*raiz)->esq), novaRaiz);
+        insere_ArvAVL_Nome(*novaRaiz, (*raiz)->pessoa);
+        reorganizarArvAVL(&((*raiz)->dir), novaRaiz);
+    }
 }
 
 // procura o menor no

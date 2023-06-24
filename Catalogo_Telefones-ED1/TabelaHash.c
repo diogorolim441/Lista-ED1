@@ -175,17 +175,23 @@ void imprimirTabelaOrdenadaNumero(int TABLE_SIZE, Hash *ha) {
     printf("----------------------FIM TABELA------------------------\n");
 }
 
-
-/*void imprimirTabelaOrdenadaNome(int TABLE_SIZE, Hash *ha) {
-    //discagemDin *liDin = cria_discagem_din();
-    int i;
+void imprimirTabelaOrdenadaNome(int TABLE_SIZE, Hash *ha) {
+    int existePessoa = 0;
     printf("\n------------------------TABELA--------------------------\n");
-    for(i = 0; i < TABLE_SIZE; i++) {
-        if(tamanho_lista(ha->itens[i]) > 0) {
-            struct discagem* aux = ha->itens[i];
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        struct discagem* aux = ha->itens[i];
+        while (aux != NULL) {
+            ArvAVL* auxNome = cria_ArvAVL();
+            reorganizarArvAVL(aux->arv,&auxNome);
             printf("DDD: %d\n", aux->prefixo);
-            
+            imprimirEmOrdemNome(*(auxNome)); // Passa o valor da árvore, não o ponteiro para a árvore
+            aux = aux->prox;
+            existePessoa++;
+            libera_ArvAVL(auxNome);
         }
     }
+    if (existePessoa == 0) {
+        printf("Nao existe pessoas cadastradas no catalogo.\n");
+    }
     printf("----------------------FIM TABELA------------------------\n");
-}*/
+}

@@ -158,11 +158,11 @@ void gerarListaTabelaHash(Hash *ha) {
                 imprimirTabelaOrdenadaNumero(1427, ha);
                 break;
             }
-            // case 2:
-            // {
-            //     imprimirTabelaOrdenadaNome(1427, ha);
-            //     break;
-            // }
+            case 2:
+            {
+                imprimirTabelaOrdenadaNome(1427, ha);
+                break;
+            }
             case 3:
             {
                 break;
