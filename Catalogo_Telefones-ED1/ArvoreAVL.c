@@ -249,7 +249,6 @@ int insere_ArvAVL(ArvAVL *raiz, struct dados pessoa) {
 
 int insere_ArvAVL_Nome(ArvAVL *raiz, struct dados pessoa) {
     int res;
-    
     if(*raiz == NULL) { //arvore vazia ou no folha
         struct NO *novo;
         novo = (struct NO*) malloc(sizeof(struct NO));
@@ -262,12 +261,13 @@ int insere_ArvAVL_Nome(ArvAVL *raiz, struct dados pessoa) {
         *raiz = novo;
         return 1;
     }
+    //if(pessoa.numero < (*raiz)->esq->pessoa.numero)
     struct NO *atual = *raiz;
     int comparacao = strcmp(pessoa.nome, atual->pessoa.nome);
     if(comparacao < 0) {
         if((res = insere_ArvAVL_Nome(&(atual->esq), pessoa)) == 1) {
             if(fatorBalanceamento_NO(atual) >= 2) {
-                if(pessoa.numero < (*raiz)->esq->pessoa.numero) {
+                if(strcmp(pessoa.nome,(*raiz)->esq->pessoa.nome) < 0) {
                     RotacaoLL(raiz);
                 }else{
                     RotacaoLR(raiz);
@@ -275,10 +275,11 @@ int insere_ArvAVL_Nome(ArvAVL *raiz, struct dados pessoa) {
             }
         }
     }else{
+        //if((*raiz)->dir->pessoa.numero < pessoa.numero)
         if(comparacao > 0) {
             if((res = insere_ArvAVL_Nome(&(atual->dir), pessoa)) == 1) {
                 if(fatorBalanceamento_NO(atual) >= 2) {
-                    if((*raiz)->dir->pessoa.numero < pessoa.numero) {
+                    if(strcmp(pessoa.nome,(*raiz)->dir->pessoa.nome) < 0) {
                         RotacaoRR(raiz);
                     }else{
                         RotacaoRL(raiz);

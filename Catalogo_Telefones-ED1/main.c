@@ -30,7 +30,7 @@ int inserir_ArvAVL_DDD(int ddd, Hash *ha, int numero) {
         int inserePessoaTabelaHash = insereHash(ha, ddd, pessoa);
         end = clock(); // marca o fim da contagem do tempo
         cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC; // calcula o tempo usado em segundos
-        printf("\nTempo de execução: %.10lf segundos\n", cpu_time_used);
+        printf("\nTempo de execucao: %.10lf segundos\n", cpu_time_used);
         if(inserePessoaTabelaHash == 1){
             
                     return 1;
@@ -53,7 +53,7 @@ int busca_ArvAVL(Hash *ha, int ddd, int numero, ArvAVL *arv2) {
         int resultConsulta = consulta_ArvAVL(arv2, numero);
         end = clock(); // marca o fim da contagem do tempo
         cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC; // calcula o tempo usado em segundos
-        printf("\nTempo de execução: %.10lf segundos\n", cpu_time_used);
+        printf("\nTempo de execucao: %.10lf segundos\n", cpu_time_used);
         if(resultConsulta == 1)
             return 1;
     }
@@ -77,7 +77,7 @@ int excluiPessoa_ArvAVL(Hash *ha, int ddd, int numero, ArvAVL *arvExclusao) {
             printf("A altura da arvore depois da exclusao e: %d\n", resultAlturaDepois);
             end = clock(); // marca o fim da contagem do tempo
             cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC; // calcula o tempo usado em segundos
-            printf("\nTempo de execução: %.10lf segundos\n", cpu_time_used);
+            printf("\nTempo de execucao: %.10lf segundos\n", cpu_time_used);
             return 1;
         }
     }
@@ -106,7 +106,7 @@ int impressao_ArvAVL(Hash *ha, int ddd, ArvAVL *arv3){
                 preOrdem_ArvAVL(arv3);
                 end = clock();
                 cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC; // calcula o tempo usado em segundos
-                printf("\nTempo de execução: %.10lf segundos\n", cpu_time_used);
+                printf("\nTempo de execucao: %.10lf segundos\n", cpu_time_used);
                 break;
 
             case 2:
@@ -114,7 +114,7 @@ int impressao_ArvAVL(Hash *ha, int ddd, ArvAVL *arv3){
                 emOrdem_ArvAVL(arv3);
                 end = clock();
                 cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC; // calcula o tempo usado em segundos
-                printf("\nTempo de execução: %.10lf segundos\n", cpu_time_used);
+                printf("\nTempo de execucao: %.10lf segundos\n", cpu_time_used);
                 break;
 
             case 3:
@@ -122,7 +122,7 @@ int impressao_ArvAVL(Hash *ha, int ddd, ArvAVL *arv3){
                 posOrdem_ArvAVL(arv3);
                 end = clock();
                 cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC; // calcula o tempo usado em segundos
-                printf("\nTempo de execução: %.10lf segundos\n", cpu_time_used);
+                printf("\nTempo de execucao: %.10lf segundos\n", cpu_time_used);
                 break;
             
             default:
@@ -204,7 +204,7 @@ void gerarListaTabelaHash(Hash *ha) {
 
                 end = clock(); // marca o fim da contagem do tempo
                 cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC; // calcula o tempo usado em segundos
-                printf("\nTempo de execução: %.10lf segundos\n", cpu_time_used);
+                printf("\nTempo de execucao: %.10lf segundos\n", cpu_time_used);
                 break;
             }
             case 2:
@@ -217,7 +217,7 @@ void gerarListaTabelaHash(Hash *ha) {
 
                 end = clock(); // marca o fim da contagem do tempo
                 cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC; // calcula o tempo usado em segundos
-                printf("\nTempo de execução: %.10lf segundos\n", cpu_time_used);
+                printf("\nTempo de execucao: %.10lf segundos\n", cpu_time_used);
                 break;
             }
             case 3:
