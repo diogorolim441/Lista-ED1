@@ -72,10 +72,10 @@ int excluiPessoa_ArvAVL(Hash *ha, int ddd, int numero, ArvAVL *arvExclusao) {
         int resultAlturaAntes = altura_ArvAVL(arvExclusao);
         int resultExclusao = remove_ArvAVL(arvExclusao, numero);
         if(resultExclusao == 1) {
-            end = clock(); // marca o fim da contagem do tempo
             printf("A altura da arvore antes da exclusao era: %d\n", resultAlturaAntes);
             int resultAlturaDepois = altura_ArvAVL(arvExclusao);
             printf("A altura da arvore depois da exclusao e: %d\n", resultAlturaDepois);
+            end = clock(); // marca o fim da contagem do tempo
             cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC; // calcula o tempo usado em segundos
             printf("\nTempo de execução: %.10lf segundos\n", cpu_time_used);
             return 1;
