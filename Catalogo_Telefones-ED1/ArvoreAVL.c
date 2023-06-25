@@ -123,7 +123,7 @@ void imprimirEmOrdemNome(ArvAVL arv) {
     }
 }
 
-// funcao que imprime a arvore avl no formato pre ordem
+// funcao que consulta a arvore avl no formato pre ordem e consulta o valor pesquisado
 int consulta_ArvAVL(ArvAVL *raiz, int numero) {
     if(raiz == NULL)
         return 0;
