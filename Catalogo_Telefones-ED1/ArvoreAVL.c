@@ -252,7 +252,6 @@ int insere_ArvAVL_Nome(ArvAVL *raiz, struct dados pessoa) {
         *raiz = novo;
         return 1;
     }
-    //if(pessoa.numero < (*raiz)->esq->pessoa.numero)
     struct NO *atual = *raiz;
     int comparacao = strcmp(pessoa.nome, atual->pessoa.nome);
     if(comparacao < 0) {
@@ -266,7 +265,6 @@ int insere_ArvAVL_Nome(ArvAVL *raiz, struct dados pessoa) {
             }
         }
     }else{
-        //if((*raiz)->dir->pessoa.numero < pessoa.numero)
         if(comparacao > 0) {
             if((res = insere_ArvAVL_Nome(&(atual->dir), pessoa)) == 1) {
                 if(fatorBalanceamento_NO(atual) >= 2) {
