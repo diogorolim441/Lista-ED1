@@ -114,6 +114,8 @@ void posOrdem_ArvAVL(ArvAVL *raiz) {
 
 // funcao que imprime a arvore avl no formato em ordem por nome
 void imprimirEmOrdemNome(ArvAVL arv) {
+    if(arv == NULL)
+        return;
     if (arv != NULL) {
         imprimirEmOrdemNome(arv->esq);
         printf("Nome: %s\nEndereco: %s\nNumero: %.0f\n\n", arv->pessoa.nome, arv->pessoa.endereco,arv->pessoa.numero);
@@ -247,6 +249,7 @@ int insere_ArvAVL(ArvAVL *raiz, struct dados pessoa) {
 
 int insere_ArvAVL_Nome(ArvAVL *raiz, struct dados pessoa) {
     int res;
+    
     if(*raiz == NULL) { //arvore vazia ou no folha
         struct NO *novo;
         novo = (struct NO*) malloc(sizeof(struct NO));
