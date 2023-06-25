@@ -36,15 +36,6 @@ void libera_ArvAVL(ArvAVL *raiz) {
     free(raiz);
 }
 
-// funcao que verifica se a arvore esta vazia
-int estaVazia_ArvAVL(ArvAVL *raiz) {
-    if(raiz == NULL)
-        return 1;
-    if(*raiz == NULL)
-        return 1;
-    return 0;
-}
-
 // funcao que verifica se a altura de uma arvore
 int altura_ArvAVL(ArvAVL *raiz) {
     if(raiz == NULL)
