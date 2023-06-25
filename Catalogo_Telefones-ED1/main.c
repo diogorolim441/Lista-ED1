@@ -158,7 +158,7 @@ int* gerar_telefones(ArvAVL *arv, int ddd){
     if(arv == NULL) {
         for(i = 0; i < 3; i++){
             numero[i] = gerador_numero();
-            printf("  %d - %d\n", i+1, numero[i]);
+            printf(" - %d\n", numero[i]);
         }
         return numero;
     }else {
@@ -169,7 +169,7 @@ int* gerar_telefones(ArvAVL *arv, int ddd){
             if(res == 1){ 
                 numero[i] = gerador_numero();
             }else{
-                printf("  %d - %d\n", i+1, numero[i]);
+                printf(" - %d\n", numero[i]);
             }
         }
         return numero;
