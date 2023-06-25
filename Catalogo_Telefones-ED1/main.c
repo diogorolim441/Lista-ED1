@@ -86,6 +86,8 @@ int excluiPessoa_ArvAVL(Hash *ha, int ddd, int numero, ArvAVL *arvExclusao) {
 
 // funcao responsavel por imprimir os dados da pessoa escolhida em diferentes formas
 int impressao_ArvAVL(Hash *ha, int ddd, ArvAVL *arv3){
+    clock_t start, end;
+    double cpu_time_used;
     int consultaHashListaArv = buscaHash(ha, ddd, arv3);
     if (consultaHashListaArv == 1){
         int resposta;
@@ -100,15 +102,27 @@ int impressao_ArvAVL(Hash *ha, int ddd, ArvAVL *arv3){
 
             switch (resposta){
             case 1:
+                start = clock();
                 preOrdem_ArvAVL(arv3);
+                end = clock();
+                cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC; // calcula o tempo usado em segundos
+                printf("\nTempo de execução: %.10lf segundos\n", cpu_time_used);
                 break;
 
             case 2:
+                start = clock();
                 emOrdem_ArvAVL(arv3);
+                end = clock();
+                cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC; // calcula o tempo usado em segundos
+                printf("\nTempo de execução: %.10lf segundos\n", cpu_time_used);
                 break;
 
             case 3:
+                start = clock();
                 posOrdem_ArvAVL(arv3);
+                end = clock();
+                cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC; // calcula o tempo usado em segundos
+                printf("\nTempo de execução: %.10lf segundos\n", cpu_time_used);
                 break;
             
             default:
